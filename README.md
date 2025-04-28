@@ -1,7 +1,7 @@
 # Blog Microservice API
 
 **Team Members:**
-- Osama Alibrahim - Developer
+- Osama Albrahim - Developer
 - Sohaib Aledlah - CI/CD Engineer
 - Aiman Alhaimi - Operations/QA Analyst
 
