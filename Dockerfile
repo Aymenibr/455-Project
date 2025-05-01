@@ -14,6 +14,7 @@ COPY . .
 
 # Expose port and run
 EXPOSE 8000
+RUN mkdir -p /app/staticfiles
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
