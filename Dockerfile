@@ -1,17 +1,20 @@
-# Use official Python image
-FROM python:3.10-slim
+# Use Miniconda base image
+FROM continuumio/miniconda3
 
-# Set working directory inside container
+# Set working directory
 WORKDIR /app
 
-# Copy project files into container
-COPY . /app
+# Copy environment file and install dependencies
+COPY environment.yml .
+RUN conda env create -f environment.yml
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Activate env, copy code
+SHELL ["conda", "run", "-n", "blogenv", "/bin/bash", "-c"]
+COPY . .
 
-# Expose port 8000 (default for Django dev server)
+# Expose port and run
 EXPOSE 8000
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
-# Run Django server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

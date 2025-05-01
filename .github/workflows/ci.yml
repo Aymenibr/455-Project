@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Conda environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          environment-file: environment.yml
+          activate-environment: blogenv
+          auto-activate-base: false
+
+      - name: Run migrations
+        run: conda run -n blogenv python manage.py migrate
+
+      - name: Lint with flake8
+        run: conda run -n blogenv flake8 blogapi
+
+      - name: Run tests
+        run: conda run -n blogenv python manage.py test
