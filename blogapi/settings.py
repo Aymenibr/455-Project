@@ -29,7 +29,9 @@ SECRET_KEY = (
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["four55-project.onrender.com", "localhost"]
+ALLOWED_HOSTS = ["four55-project.onrender.com",
+                  "localhost", 
+                  "four55-project-1.onrender.com"]
 
 
 # Application definition
